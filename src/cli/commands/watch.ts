@@ -56,8 +56,9 @@ export function registerWatchCommands(program: Command) {
     .command('pause')
     .description('Pause watch mode')
     .action(() => {
-      // In a real CLI, we'd use IPC to pause the daemon.
-      // For MVP, we'll just create a lockfile.
+      if (!fs.existsSync('.engram')) {
+        fs.mkdirSync('.engram', { recursive: true });
+      }
       fs.writeFileSync('.engram/paused', 'true');
       console.log('Watch mode paused.');
     });

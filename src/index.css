@@ -17,15 +17,17 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--f-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* Visible grid borders—don't hide the structure, celebrate it */
 .data-row {
   display: grid;
-  grid-template-columns: 60px 1fr 100px 100px 100px;
+  grid-template-columns: 80px 1fr 120px 120px 120px 60px;
   padding: 1rem;
   border-bottom: 1px solid var(--line);
   transition: background 0.2s ease, color 0.2s ease;
-  cursor: pointer;
+  align-items: center;
 }
 
 .data-row:hover {
@@ -35,11 +37,11 @@ body {
 
 .data-row-edge {
   display: grid;
-  grid-template-columns: 60px 1fr 1fr 1fr;
+  grid-template-columns: 80px 1fr 1fr 1fr 60px;
   padding: 1rem;
   border-bottom: 1px solid var(--line);
   transition: background 0.2s ease, color 0.2s ease;
-  cursor: pointer;
+  align-items: center;
 }
 
 .data-row-edge:hover {
@@ -47,36 +49,72 @@ body {
   color: var(--bg);
 }
 
+/* Italic serif column headers—humanizes the data */
 .col-header {
   font-family: 'Georgia', serif;
   font-style: italic;
   font-size: 11px;
-  opacity: 0.5;
+  opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
+/* Monospace for data values—signals precision */
 .data-value {
   font-family: var(--f-mono);
   letter-spacing: -0.02em;
+  font-size: 13px;
+}
+
+.brutal-input {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 0.75rem 1rem;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  width: 100%;
+  border-radius: 0;
+}
+
+.brutal-input:focus {
+  outline: none;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.brutal-button {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--line);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.brutal-button:hover {
+  background: transparent;
+  color: var(--ink);
 }
 
 .pill-enforced {
-  background-color: #FF4444;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
+  background-color: var(--ink);
+  color: var(--bg);
+  padding: 2px 8px;
+  font-family: var(--f-mono);
   font-size: 10px;
-  font-weight: bold;
   text-transform: uppercase;
+  border: 1px solid var(--ink);
 }
 
 .pill-advisory {
-  background-color: #888888;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
+  background-color: transparent;
+  color: var(--ink);
+  padding: 2px 8px;
+  font-family: var(--f-mono);
   font-size: 10px;
-  font-weight: bold;
   text-transform: uppercase;
+  border: 1px solid var(--ink);
 }

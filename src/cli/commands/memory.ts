@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { addMemory, updateMemory, deleteMemory, searchMemories, getAllMemories } from '../../core/memory.js';
+import { addMemory, updateMemory, deleteMemory, searchMemories, getAllMemories, decayMemories, pruneMemories } from '../../core/memory.js';
 
 export function registerMemoryCommands(program: Command) {
   const memoryCmd = program.command('memory').description('Manage memories');
@@ -60,5 +60,16 @@ export function registerMemoryCommands(program: Command) {
       results.forEach(m => {
         console.log(`[${m.id}] (${m.scope}) [Imp: ${m.importance}] ${m.enforced ? '[ENFORCED] ' : ''}${m.content}`);
       });
+    });
+
+  memoryCmd
+    .command('prune')
+    .description('Decay old memories and prune those with 0 importance')
+    .option('-d, --days <number>', 'Days before a memory decays', '7')
+    .action((options) => {
+      const decayed = decayMemories(parseInt(options.days));
+      const pruned = pruneMemories();
+      console.log(`Decayed ${decayed} memories.`);
+      console.log(`Pruned ${pruned} memories.`);
     });
 }
